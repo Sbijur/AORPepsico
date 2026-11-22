@@ -303,8 +303,8 @@ with tabs[2]:
     st.dataframe(show[cols].style.format({"Objective": "{:,.1f}", "PepsiCo profit": "{:,.0f}",
                                           "Retailer profit": "{:,.0f}", "Trade spend": "{:,.0f}",
                                           "Units": "{:,.0f}", "Margin %": "{:.1f}"})
-                 .apply(lambda r: ["background-color:#d4edda" if r["Result"] == "🏆 OPTIMAL"
-                                   else "background-color:#f8d7da" if r["Result"] == "❌ infeasible" else ""
+                 .apply(lambda r: ["background-color:#d4edda;color:#14532d" if r["Result"] == "🏆 OPTIMAL"
+                                   else "background-color:#f8d7da;color:#7f1d1d" if r["Result"] == "❌ infeasible" else ""
                                    for _ in r], axis=1),
                  hide_index=True, **STRETCH)
     ch = alt.Chart(show).mark_bar().encode(
@@ -413,8 +413,8 @@ with tabs[4]:
     n_ok = sum(c[1] for c in checks)
     st.dataframe(pd.DataFrame([{"ID": n.split()[0], "Check": n.split("  ", 1)[-1].strip(), "Observed": d,
                                 "Result": "✅ Pass" if p else "❌ Fail"} for n, p, d in checks])
-                 .style.apply(lambda r: ["background-color:#d4edda" if r["Result"] == "✅ Pass"
-                                         else "background-color:#f8d7da" for _ in r], axis=1),
+                 .style.apply(lambda r: ["background-color:#d4edda;color:#14532d" if r["Result"] == "✅ Pass"
+                                         else "background-color:#f8d7da;color:#7f1d1d" for _ in r], axis=1),
                  hide_index=True, **STRETCH)
     st.metric("Self-checks passed", f"{n_ok} / {len(checks)}")
 
